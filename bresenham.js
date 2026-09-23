@@ -64,7 +64,22 @@ function drawPixel(x, y) {
 }
 
 function drawBresenham() {
-    
+    x = lineX0;
+    y = lineY0;
+    dx = lineX1 - lineX0;
+    dy = lineY1 - lineY0;
+
+    d = dx;
+    while(x <= lineX1) {
+        drawPixel(x, y);
+        x = x + 1;
+        d = d - 2*dy;
+        // check if we need to move to the next line
+        if (d < 0) {
+            y = y + 1;
+            d = d + 2*dx;
+        }
+    }
 }
 function drawLine(x0, y0, x1, y1) {
     context.beginPath();
